@@ -27,6 +27,7 @@ func setContent(wheel *Wheel, status *Status, par *widgets.Paragraph) {
 			wheel,
 			status.Remaining,
 		)
+	    par.BorderStyle.Fg = ui.ColorRed
 	case BREAKING:
 
 		par.Text = fmt.Sprintf(
@@ -43,6 +44,7 @@ func setContent(wheel *Wheel, status *Status, par *widgets.Paragraph) {
 			wheel,
 			status.Pauseduration,
 		)
+	    par.BorderStyle.Fg = ui.ColorGreen
 	case PAUSED:
 		par.Text = fmt.Sprintf(`Pomo is suspended.
 			
@@ -55,6 +57,7 @@ func setContent(wheel *Wheel, status *Status, par *widgets.Paragraph) {
 			`,
 			status.TaskMessage,
 		)
+	    par.BorderStyle.Fg = ui.ColorYellow
 	case COMPLETE:
 		par.Text = `This session has concluded.
 
@@ -63,13 +66,10 @@ func setContent(wheel *Wheel, status *Status, par *widgets.Paragraph) {
 
 		[q] - quit
 		`
+	    par.BorderStyle.Fg = ui.ColorCyan
 	}
 	par.Title = fmt.Sprintf("Pomo - %s", status.State)
 	par.TitleStyle.Fg = ui.ColorWhite
-	par.BorderStyle.Fg = ui.ColorRed
-	if status.State == RUNNING {
-		par.BorderStyle.Fg = ui.ColorGreen
-	}
 }
 
 func StartUI(runner *TaskRunner) {
